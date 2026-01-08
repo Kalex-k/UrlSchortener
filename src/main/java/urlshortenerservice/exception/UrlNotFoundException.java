@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.exception;
+package java.urlshortenerservice.exception;
 
 public class UrlNotFoundException extends RuntimeException {
     public UrlNotFoundException(String message) {

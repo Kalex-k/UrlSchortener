@@ -1,8 +1,8 @@
-package faang.school.urlshortenerservice.scheduler;
+package java.urlshortenerservice.scheduler;
 
-import faang.school.urlshortenerservice.service.HashCacheService;
-import faang.school.urlshortenerservice.service.HashCacheServiceRedis;
-import faang.school.urlshortenerservice.service.HashGenerator;
+import java.urlshortenerservice.service.HashCacheService;
+import java.urlshortenerservice.service.HashCacheServiceRedis;
+import java.urlshortenerservice.service.HashGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;

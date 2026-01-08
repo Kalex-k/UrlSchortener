@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.repository;
+package java.urlshortenerservice.repository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

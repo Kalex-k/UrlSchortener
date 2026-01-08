@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.service;
+package java.urlshortenerservice.service;
 
 import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;

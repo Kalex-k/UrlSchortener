@@ -1,8 +1,8 @@
-package faang.school.urlshortenerservice.service;
+package java.urlshortenerservice.service;
 
-import faang.school.urlshortenerservice.config.RetryExecutor;
-import faang.school.urlshortenerservice.exception.NoAvailableHashException;
-import faang.school.urlshortenerservice.repository.HashRepository;
+import java.urlshortenerservice.config.RetryExecutor;
+import java.urlshortenerservice.exception.NoAvailableHashException;
+import java.urlshortenerservice.repository.HashRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

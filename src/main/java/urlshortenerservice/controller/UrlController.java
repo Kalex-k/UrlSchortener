@@ -1,10 +1,10 @@
-package faang.school.urlshortenerservice.controller;
+package java.urlshortenerservice.controller;
 
-import faang.school.urlshortenerservice.annotation.RateLimited;
-import faang.school.urlshortenerservice.dto.CreateUrlRequest;
-import faang.school.urlshortenerservice.dto.CreateUrlResponse;
-import faang.school.urlshortenerservice.service.RedirectValidator;
-import faang.school.urlshortenerservice.service.UrlService;
+import java.urlshortenerservice.annotation.RateLimited;
+import java.urlshortenerservice.dto.CreateUrlRequest;
+import java.urlshortenerservice.dto.CreateUrlResponse;
+import java.urlshortenerservice.service.RedirectValidator;
+import java.urlshortenerservice.service.UrlService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -103,14 +103,14 @@ public class UrlController {
         
         if (originalUrl == null || originalUrl.isEmpty()) {
             log.warn("URL not found for hash: {}", hash);
-            throw new faang.school.urlshortenerservice.exception.UrlNotFoundException("URL not found for hash: " + hash);
+            throw new java.urlshortenerservice.exception.UrlNotFoundException("URL not found for hash: " + hash);
         }
 
         log.debug("Found URL for hash {}: {} (from cache: {})", hash, originalUrl, fromCache);
 
         try {
             redirectValidator.validateRedirectUrl(originalUrl);
-        } catch (faang.school.urlshortenerservice.exception.InvalidUrlException e) {
+        } catch (java.urlshortenerservice.exception.InvalidUrlException e) {
             log.error("Redirect validation failed for hash {}: {}", hash, e.getMessage());
             throw e;
         }

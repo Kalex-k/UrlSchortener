@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.service;
+package java.urlshortenerservice.service;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;

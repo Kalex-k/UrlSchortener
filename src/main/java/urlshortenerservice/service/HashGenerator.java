@@ -1,7 +1,7 @@
-package faang.school.urlshortenerservice.service;
+package java.urlshortenerservice.service;
 
-import faang.school.urlshortenerservice.properties.HashGeneratorProperties;
-import faang.school.urlshortenerservice.repository.HashRepository;
+import java.urlshortenerservice.properties.HashGeneratorProperties;
+import java.urlshortenerservice.repository.HashRepository;
 import io.micrometer.core.instrument.Timer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

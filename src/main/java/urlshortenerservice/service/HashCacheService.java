@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.service;
+package java.urlshortenerservice.service;
 
 public interface HashCacheService {
     String getHash();

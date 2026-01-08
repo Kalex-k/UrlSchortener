@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.config;
+package java.urlshortenerservice.config;
 
 import io.github.bucket4j.distributed.ExpirationAfterWriteStrategy;
 import io.github.bucket4j.distributed.proxy.ProxyManager;

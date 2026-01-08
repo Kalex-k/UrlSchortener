@@ -1,6 +1,6 @@
-package faang.school.urlshortenerservice.repository;
+package java.urlshortenerservice.repository;
 
-import faang.school.urlshortenerservice.config.RetryExecutor;
+import java.urlshortenerservice.config.RetryExecutor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

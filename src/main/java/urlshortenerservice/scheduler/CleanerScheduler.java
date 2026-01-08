@@ -1,6 +1,6 @@
-package faang.school.urlshortenerservice.scheduler;
+package java.urlshortenerservice.scheduler;
 
-import faang.school.urlshortenerservice.service.UrlCleanerService;
+import java.urlshortenerservice.service.UrlCleanerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;

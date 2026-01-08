@@ -1,6 +1,6 @@
-package faang.school.urlshortenerservice.exception;
+package java.urlshortenerservice.exception;
 
-import faang.school.urlshortenerservice.dto.ErrorResponse;
+import java.urlshortenerservice.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;

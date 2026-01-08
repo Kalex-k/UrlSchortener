@@ -1,7 +1,7 @@
-package faang.school.urlshortenerservice.service;
+package java.urlshortenerservice.service;
 
-import faang.school.urlshortenerservice.repository.HashRepository;
-import faang.school.urlshortenerservice.repository.UrlRepository;
+import java.urlshortenerservice.repository.HashRepository;
+import java.urlshortenerservice.repository.UrlRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.jodah.failsafe.Failsafe;

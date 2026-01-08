@@ -1,9 +1,9 @@
-package faang.school.urlshortenerservice.aspect;
+package java.urlshortenerservice.aspect;
 
-import faang.school.urlshortenerservice.annotation.RateLimited;
-import faang.school.urlshortenerservice.config.context.UserContext;
-import faang.school.urlshortenerservice.exception.RateLimitExceededException;
-import faang.school.urlshortenerservice.service.MetricsService;
+import java.urlshortenerservice.annotation.RateLimited;
+import java.urlshortenerservice.config.context.UserContext;
+import java.urlshortenerservice.exception.RateLimitExceededException;
+import java.urlshortenerservice.service.MetricsService;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.BucketConfiguration;

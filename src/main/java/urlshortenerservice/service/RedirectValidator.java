@@ -1,7 +1,7 @@
-package faang.school.urlshortenerservice.service;
+package java.urlshortenerservice.service;
 
-import faang.school.urlshortenerservice.exception.InvalidUrlException;
-import faang.school.urlshortenerservice.properties.RedirectValidationProperties;
+import java.urlshortenerservice.exception.InvalidUrlException;
+import java.urlshortenerservice.properties.RedirectValidationProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

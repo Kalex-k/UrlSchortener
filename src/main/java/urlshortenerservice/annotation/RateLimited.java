@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.annotation;
+package java.urlshortenerservice.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

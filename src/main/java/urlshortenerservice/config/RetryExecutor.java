@@ -1,6 +1,6 @@
-package faang.school.urlshortenerservice.config;
+package java.urlshortenerservice.config;
 
-import faang.school.urlshortenerservice.properties.RetryProperties;
+import java.urlshortenerservice.properties.RetryProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.TransientDataAccessException;

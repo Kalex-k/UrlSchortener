@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.properties;
+package java.urlshortenerservice.properties;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;

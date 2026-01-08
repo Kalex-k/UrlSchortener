@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.config;
+package java.urlshortenerservice.config;
 
 import net.javacrumbs.shedlock.core.LockProvider;
 import net.javacrumbs.shedlock.provider.jdbctemplate.JdbcTemplateLockProvider;

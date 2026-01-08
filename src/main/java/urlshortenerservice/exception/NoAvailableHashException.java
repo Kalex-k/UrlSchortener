@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.exception;
+package java.urlshortenerservice.exception;
 
 public class NoAvailableHashException extends RuntimeException {
     public NoAvailableHashException(String message) {

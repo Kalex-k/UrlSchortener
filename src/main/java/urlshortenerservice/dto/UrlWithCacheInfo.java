@@ -1,4 +1,4 @@
-package faang.school.urlshortenerservice.dto;
+package java.urlshortenerservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

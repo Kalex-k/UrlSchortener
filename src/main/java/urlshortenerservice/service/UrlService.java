@@ -1,12 +1,12 @@
-package faang.school.urlshortenerservice.service;
+package java.urlshortenerservice.service;
 
-import faang.school.urlshortenerservice.dto.UrlWithCacheInfo;
-import faang.school.urlshortenerservice.exception.InvalidUrlException;
-import faang.school.urlshortenerservice.exception.NoAvailableHashException;
-import faang.school.urlshortenerservice.exception.UrlNotFoundException;
-import faang.school.urlshortenerservice.properties.UrlValidationProperties;
-import faang.school.urlshortenerservice.repository.UrlCacheRepository;
-import faang.school.urlshortenerservice.repository.UrlRepository;
+import java.urlshortenerservice.dto.UrlWithCacheInfo;
+import java.urlshortenerservice.exception.InvalidUrlException;
+import java.urlshortenerservice.exception.NoAvailableHashException;
+import java.urlshortenerservice.exception.UrlNotFoundException;
+import java.urlshortenerservice.properties.UrlValidationProperties;
+import java.urlshortenerservice.repository.UrlCacheRepository;
+import java.urlshortenerservice.repository.UrlRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import io.micrometer.core.instrument.Timer;
