@@ -1,0 +1,128 @@
+plugins {
+    java
+    id("org.springframework.boot") version "3.0.6"
+    id("io.spring.dependency-management") version "1.1.0"
+}
+
+group = "faang.school"
+version = "1.0"
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /**
+     * Spring boot starters
+     */
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+    /**
+     * Database
+     */
+    implementation("org.liquibase:liquibase-core")
+    implementation("redis.clients:jedis:4.3.2")
+    runtimeOnly("org.postgresql:postgresql")
+
+    /**
+     * Utils & Logging
+     */
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+    implementation("org.slf4j:slf4j-api:2.0.5")
+    implementation("ch.qos.logback:logback-classic:1.4.6")
+    implementation("org.projectlombok:lombok:1.18.32")
+    annotationProcessor("org.projectlombok:lombok:1.18.32")
+    implementation("org.mapstruct:mapstruct:1.5.3.Final")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+    
+    /**
+     * Retry & Resilience
+     */
+    implementation("net.jodah:failsafe:2.4.4")
+    implementation("org.springframework.retry:spring-retry:2.0.2")
+    implementation("org.springframework:spring-aspects")
+    
+    /**
+     * Rate Limiting
+     */
+    implementation("com.bucket4j:bucket4j-core:8.7.0")
+    implementation("com.bucket4j:bucket4j-redis:8.7.0")
+    implementation("io.lettuce:lettuce-core:6.2.4.RELEASE")
+    
+    /**
+     * Scheduler Lock (ShedLock)
+     */
+    implementation("net.javacrumbs.shedlock:shedlock-spring:5.9.1")
+    implementation("net.javacrumbs.shedlock:shedlock-provider-jdbc-template:5.9.1")
+    
+    /**
+     * Metrics
+     */
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-core")
+    implementation("io.micrometer:micrometer-registry-prometheus")
+    
+    /**
+     * API Documentation (Swagger/OpenAPI)
+     */
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+
+    /**
+     * Test containers
+     */
+    implementation(platform("org.testcontainers:testcontainers-bom:1.17.6"))
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
+    testImplementation("com.redis.testcontainers:testcontainers-redis-junit-jupiter:1.4.6")
+
+    /**
+     * Tests
+     */
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
+    testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+val test by tasks.getting(Test::class) { testLogging.showStandardStreams = true }
+
+tasks.bootJar {
+    archiveFileName.set("service.jar")
+}
+
+tasks.bootRun {
+    // JVM settings optimized for stress testing
+    // No memory limits by default - JVM will manage memory automatically
+    // Override via JAVA_OPTS environment variable if you need specific limits
+    // Example: JAVA_OPTS="-Xmx4g -Xms2g" ./gradlew bootRun
+    
+    val javaOpts = System.getenv("JAVA_OPTS")
+    if (javaOpts != null && javaOpts.isNotBlank()) {
+        // Use JAVA_OPTS if provided (allows custom memory limits)
+        jvmArgs = javaOpts.split("\\s+").toList()
+    } else {
+        // Default: no memory limits, only GC and performance optimizations
+        jvmArgs = listOf(
+            "-XX:+UseG1GC",              // G1GC for better pause times under load
+            "-XX:MaxGCPauseMillis=200",  // Target max GC pause
+            "-Djava.awt.headless=true"   // Headless mode
+            // No -Xmx/-Xms - let JVM use available memory as needed
+        )
+    }
+}

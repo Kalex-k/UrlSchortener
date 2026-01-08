@@ -1,0 +1,169 @@
+spring:
+  application:
+    name: url-shortener-service
+  
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${SPRING_DATASOURCE_USERNAME:user}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    hikari:
+      # Optimized connection pool for stress testing
+      maximum-pool-size: 500  # Increased for high load
+      minimum-idle: 100  # Increased to reduce connection acquisition time
+      connection-timeout: 30000  # 30 seconds
+      idle-timeout: 600000  # 10 minutes
+      max-lifetime: 1800000  # 30 minutes
+      leak-detection-threshold: 60000  # 1 minute - for leak detection
+      pool-name: UrlShortenerHikariPool
+      # Optimize for high throughput
+      connection-test-query: SELECT 1
+      # Register JMX beans for monitoring
+      register-mbeans: true
+      # Performance optimizations
+      validation-timeout: 3000  # 3 seconds for connection validation
+      initialization-fail-timeout: 1  # Fail fast if pool can't be initialized
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false  # Disabled for performance during stress testing
+    properties:
+      hibernate:
+        format_sql: false
+        # Optimize for high throughput
+        jdbc:
+          batch_size: 50
+          order_inserts: true
+          order_updates: true
+        # Disable unnecessary features for performance
+        generate_statistics: false
+        use_sql_comments: false
+        # Query cache disabled for performance
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      # Lettuce is non-blocking and handles connections efficiently
+      # For high load, increase timeout
+      timeout: 10000  # Connection timeout (ms) - increased to 10s for high load
+      lettuce:
+        shutdown-timeout: 500ms
+        # Lettuce uses non-blocking I/O, no connection pool needed
+        # Connection pooling is handled internally by Lettuce
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s
+
+server:
+  port: 8080
+  host: localhost
+
+app:
+  base-url: ${APP_BASE_URL:http://localhost:8080}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics,mappings
+  endpoint:
+    health:
+      show-details: when-authorized
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name:url-shortener-service}
+      environment: ${ENVIRONMENT:local}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.5, 0.9, 0.95, 0.99
+
+hash:
+  batch-size: 500  # Increased for better DB efficiency
+  cache:
+    type: redis
+    max-size: 10000  # Increased cache size to prevent Redis exhaustion
+    refill-threshold-percent: 20
+    fallback:
+      max-concurrent: 20  # Increased for stress testing
+    executor:
+      core-pool-size: 10  # Increased thread pool
+      max-pool-size: 20
+      queue-capacity: 200
+      keep-alive-seconds: 60
+  generator:
+    cron: "0 */5 * * * *"
+    retry:
+      max-attempts: 3
+      delay-ms: 1000
+    thread-pool:
+      size: 5
+      queue-capacity: 100
+
+cleaner:
+  cron: "0 0 2 * * ?"
+  retention-years: 1
+  batch-size: 1000
+  retry:
+    max-attempts: 3
+    delay-ms: 1000
+
+rate-limit:
+  enabled: true  # Enabled with very high limits
+  capacity: 100000  # Very high capacity for stress testing (100k requests)
+  refill-tokens: 100000  # Very high refill rate (100k per minute)
+  refill-duration-seconds: 60
+  bucket-expiration-minutes: 10
+
+url:
+  cache:
+    default-ttl-hours: 24
+  validation:
+    max-length: 2048
+    forbidden-schemes:
+      - javascript
+      - data
+      - file
+      - about
+      - vbscript
+      - mailto
+      - tel
+  retry:
+    max-attempts: 3
+    delay-ms: 100
+
+redirect:
+  validation:
+    blacklisted-domains:
+      # Known malicious domains can be added here
+      # Examples:
+      # - malicious-site.com
+      # - phishing-bank.net
+      # - iplogger.org
+      # - grabify.link
